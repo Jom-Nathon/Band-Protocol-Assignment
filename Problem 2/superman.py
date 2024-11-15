@@ -1,4 +1,4 @@
-import random, bisect
+import random
 
 class testCase :
     def __init__(self, chicken, roofLength, chickenIndexes) -> None:
@@ -16,24 +16,21 @@ class testCase :
 def findMaxChicken(chickenObj) :
 
     ### Invalid data fail save ###
-    if chickenObj.chicken != len(chickenObj.chickenIndexes) :
+    if chickenObj.chicken != len(chickenObj.chickenIndexes) or chickenObj.roofLength < 0 :
         print("Invalid input!")
         return None
     
     coverage = 0
-    # print("This is rooflen : " + str(chickenObj.roofLength))
-    # print("This is chicken : " + str(chickenObj.chicken))
-    # print(chickenObj.chickenIndexes)
-    for i in range(len(chickenObj.chickenIndexes)) :
-        chickenPos = chickenObj.chickenIndexes[i]
-        # print("___________________________________")
-        # print("this is chickenPos : " + str(chickenPos))
-        pointer2 = bisect.bisect_left(chickenObj.chickenIndexes, chickenPos + chickenObj.roofLength) - 1
-        # print("this is pointer2 : " + str(pointer2))
-        # print("this is i : " + str(i))
-        if pointer2 - i + 1 > coverage :
-            coverage = pointer2 - i + 1
-        # print("this is coverage : " + str(coverage))
+    right = 0
+    left = 0
+
+    while right < len(chickenObj.chickenIndexes) :
+        if chickenObj.chickenIndexes[right] - chickenObj.chickenIndexes[left] < chickenObj.roofLength :
+            coverage = max(coverage, right - left + 1)
+            right += 1
+        else :
+            left += 1
+
     return coverage
 
 # test1 = testCase(5, 5, [2, 5, 10, 12, 15])
