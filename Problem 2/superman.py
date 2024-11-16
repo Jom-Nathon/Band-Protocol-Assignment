@@ -33,13 +33,13 @@ def findMaxChicken(chickenObj) :
 
     return coverage
 
-# test1 = testCase(5, 5, [2, 5, 10, 12, 15])
-# test2 = testCase(6, 10, [1, 11, 30, 34, 35, 37])
-# test3 = testCase(1, 1, [37])
-# test4 = testCase(6, -50, [1, 11, 30, 34, 35, 37])
+test1 = testCase(5, 5, [2, 5, 10, 12, 15])
+test2 = testCase(6, 10, [1, 11, 30, 34, 35, 37])
+test3 = testCase(0, 1, [])
+test4 = testCase(6, -50, [1, 11, 30, 34, 35, 37])
 
-# print("result : " + str(findMaxChicken(test1)))
-# print("result : " + str(findMaxChicken(test2)))
-# print("result : " + str(findMaxChicken(test3)))
-# print("result : " + str(findMaxChicken(test4)))
-print(findMaxChicken(testCase.genTestCase()))
+print("result : " + str(findMaxChicken(test1)))
+print("result : " + str(findMaxChicken(test2)))
+print("result : " + str(findMaxChicken(test3)))
+print("result : " + str(findMaxChicken(test4)))
+# print(findMaxChicken(testCase.genTestCase()))
