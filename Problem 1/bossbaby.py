@@ -1,35 +1,44 @@
 import random
 
 def genTestCase() :
-    testCase = "".join(random.choices("R" + "S", k=random.randrange(1, 100)))
-    print(testCase)
+    testCase = "".join(random.choices("R" + "S", k=random.randrange(1, 1000001)))
     return testCase
 
 def checkBoy(boyString) :
-    boyList = list(boyString)
-    print(boyList)
-    status = True
+    try :
+        if boyString[0] == 'R':
+            return "Bad boy"
+    except IndexError :
+        print("Empty List!")
+        return "Good boy"
+    
+    shotCount= 0
+    remainingLength = len(boyString)
 
-    pointer1 = 0
-    pointer2 = 0
+    for char in boyString:
+        remainingLength -= 1
+        if char == 'S':
+            shotCount += 1
+        else:
+            shotCount = max(0, shotCount - 1)
 
-    while pointer1 <= (len(boyList)) :
-        if boyList[pointer1] == 'R':
-            status = False
-            print("Bad boy!")
-            return status
-        elif boyList[pointer1] == 'S':
-            while (boyList[pointer2] != 'R') and (pointer2 < len(boyList)-1):
-                pointer2 += 1
-            if boyList[pointer2] == 'S' and pointer2 == len(boyList)-1:
-                status = False
-                print("Bad boy!")
-                return status
-            while boyList[pointer2] == 'R':
-                boyList.pop(pointer2)
-            boyList.pop(pointer1)
-        print(boyList)
-    print("Good boy!")
-    return status
+        if shotCount > remainingLength :
+            return "Bad boy"
 
-checkBoy(genTestCase())
+    return "Good boy"
+
+test_cases = [
+    "SRSSRRR",  # Good boy
+    "RSSRR",    # Bad boy (starts with R)
+    "SSSRRRRS", # Bad boy (last S has no revenge)
+    "SRRSSR",   # Bad boy (last S has no revenge)
+    "SSRSRR",    # Good boy
+    "S",        # Bad boy
+    "R",        # Bad boy
+    ""          # Empty
+]
+
+for test in test_cases:
+    print(f"{test}: {checkBoy(test)}")
+
+# print(checkBoy(genTestCase()))
