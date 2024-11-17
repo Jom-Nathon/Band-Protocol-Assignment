@@ -8,9 +8,11 @@ def checkBoy(boyString) :
     try :
         if boyString[0] == 'R':
             return "Bad boy"
+        elif len(boyString) > 1000000 :
+            return "String too large!"
     except IndexError :
         print("Empty List!")
-        return "Good boy"
+        return None
     
     shotCount= 0
     remainingLength = len(boyString)
